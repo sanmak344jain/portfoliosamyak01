@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
     <title>Samyak Jain | Web Developer Portfolio</title>
@@ -13,21 +13,61 @@
     <meta property="og:type" content="website" />
     <meta name="twitter:card" content="summary" />
     <meta name="twitter:title" content="Samyak Jain | Web Developer Portfolio" />
+    <meta name="color-scheme" content="dark light" />
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>S</text></svg>" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
     <style>
-      :root {
+      /* ── Dark Theme (default) ── */
+      :root,
+      [data-theme="dark"] {
         --bg: #0f1117;
         --bg-card: #171923;
-        --bg-card-hover: #1c1f2e;
+        --bg-header: rgba(15, 17, 23, 0.88);
+        --bg-mobile-menu: rgba(15, 17, 23, 0.98);
+        --bg-input: rgba(255, 255, 255, 0.03);
         --accent: #4f7df5;
         --accent-light: #7ba1ff;
         --accent-soft: rgba(79, 125, 245, 0.1);
         --accent-glow: rgba(79, 125, 245, 0.25);
         --text: #e2e4ea;
+        --text-heading: #ffffff;
         --text-secondary: #a0a4b8;
         --border: rgba(160, 164, 184, 0.1);
         --border-hover: rgba(79, 125, 245, 0.25);
+        --chip-bg: rgba(255, 255, 255, 0.02);
+        --card-hover-bg: rgba(255, 255, 255, 0.04);
+        --btn-outline-hover: rgba(255, 255, 255, 0.04);
+        --placeholder: rgba(160, 164, 184, 0.4);
+        --logo-text: #fff;
+        --shadow-card: none;
+        --toggle-bg: rgba(255, 255, 255, 0.08);
+        --toggle-hover: rgba(255, 255, 255, 0.14);
+      }
+
+      /* ── Light Theme ── */
+      [data-theme="light"] {
+        --bg: #f8f9fc;
+        --bg-card: #ffffff;
+        --bg-header: rgba(248, 249, 252, 0.9);
+        --bg-mobile-menu: rgba(248, 249, 252, 0.98);
+        --bg-input: #f1f3f8;
+        --accent: #3b6de6;
+        --accent-light: #3b6de6;
+        --accent-soft: rgba(59, 109, 230, 0.08);
+        --accent-glow: rgba(59, 109, 230, 0.15);
+        --text: #374151;
+        --text-heading: #111827;
+        --text-secondary: #6b7280;
+        --border: rgba(0, 0, 0, 0.08);
+        --border-hover: rgba(59, 109, 230, 0.25);
+        --chip-bg: #f3f4f6;
+        --card-hover-bg: #f9fafb;
+        --btn-outline-hover: rgba(0, 0, 0, 0.04);
+        --placeholder: rgba(107, 114, 128, 0.5);
+        --logo-text: #fff;
+        --shadow-card: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+        --toggle-bg: rgba(0, 0, 0, 0.06);
+        --toggle-hover: rgba(0, 0, 0, 0.1);
       }
 
       * {
@@ -46,6 +86,7 @@
         line-height: 1.65;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
+        transition: background 0.3s, color 0.3s;
       }
       a {
         color: var(--accent-light);
@@ -53,7 +94,7 @@
         transition: color 0.2s;
       }
       a:hover {
-        color: #fff;
+        color: var(--text-heading);
       }
 
       .container {
@@ -71,12 +112,12 @@
         z-index: 100;
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
-        background: rgba(15, 17, 23, 0.88);
+        background: var(--bg-header);
         border-bottom: 1px solid var(--border);
-        transition: box-shadow 0.3s;
+        transition: box-shadow 0.3s, background 0.3s;
       }
       header.scrolled {
-        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 1px 20px rgba(0, 0, 0, 0.15);
       }
       .nav {
         max-width: 1080px;
@@ -101,13 +142,18 @@
         justify-content: center;
         font-weight: 700;
         font-size: 0.9rem;
-        color: #fff;
+        color: var(--logo-text);
         letter-spacing: 0.02em;
       }
       .nav-name {
         font-weight: 600;
         font-size: 0.95rem;
-        color: var(--text);
+        color: var(--text-heading);
+      }
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
       }
       .nav-links {
         display: flex;
@@ -123,8 +169,8 @@
       }
       .nav-links a:hover,
       .nav-links a.active {
-        color: var(--text);
-        background: rgba(255, 255, 255, 0.05);
+        color: var(--text-heading);
+        background: var(--btn-outline-hover);
       }
       .nav-contact {
         margin-left: 0.5rem;
@@ -139,6 +185,47 @@
       .nav-contact:hover {
         opacity: 0.9;
         background: var(--accent) !important;
+        color: #fff !important;
+      }
+
+      /* Theme toggle */
+      .theme-toggle {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        border: none;
+        background: var(--toggle-bg);
+        color: var(--text-secondary);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+        flex-shrink: 0;
+      }
+      .theme-toggle:hover {
+        background: var(--toggle-hover);
+        color: var(--text-heading);
+      }
+      .theme-toggle svg {
+        width: 18px;
+        height: 18px;
+      }
+      .icon-sun,
+      .icon-moon {
+        display: none;
+      }
+      [data-theme="dark"] .icon-sun {
+        display: block;
+      }
+      [data-theme="dark"] .icon-moon {
+        display: none;
+      }
+      [data-theme="light"] .icon-sun {
+        display: none;
+      }
+      [data-theme="light"] .icon-moon {
+        display: block;
       }
 
       /* Hamburger */
@@ -173,7 +260,7 @@
         display: none;
         position: fixed;
         inset: 0;
-        background: rgba(15, 17, 23, 0.98);
+        background: var(--bg-mobile-menu);
         backdrop-filter: blur(20px);
         z-index: 99;
         flex-direction: column;
@@ -185,7 +272,7 @@
         display: flex;
       }
       .mobile-menu a {
-        color: var(--text);
+        color: var(--text-heading);
         font-size: 1.3rem;
         font-weight: 500;
         padding: 0.5rem 1rem;
@@ -238,10 +325,10 @@
         letter-spacing: -0.025em;
         line-height: 1.2;
         margin-bottom: 1rem;
-        color: #fff;
+        color: var(--text-heading);
       }
       .hero h1 .gradient-text {
-        background: linear-gradient(135deg, var(--accent-light), #c7a4ff);
+        background: linear-gradient(135deg, var(--accent), #8b7cf6);
         -webkit-background-clip: text;
         background-clip: text;
         color: transparent;
@@ -275,7 +362,7 @@
         text-decoration: none;
       }
       .btn:hover {
-        color: #fff;
+        color: var(--text-heading);
       }
       .btn-primary {
         background: var(--accent);
@@ -289,8 +376,8 @@
         color: #fff;
       }
       .btn-outline:hover {
-        background: rgba(255, 255, 255, 0.04);
-        border-color: rgba(255, 255, 255, 0.15);
+        background: var(--btn-outline-hover);
+        border-color: rgba(128, 128, 128, 0.2);
         transform: translateY(-1px);
       }
 
@@ -320,6 +407,8 @@
         background: var(--bg-card);
         border: 1px solid var(--border);
         overflow: hidden;
+        box-shadow: var(--shadow-card);
+        transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
       }
       .hero-card::before {
         content: "";
@@ -347,13 +436,14 @@
       .stat-box {
         padding: 0.85rem;
         border-radius: 8px;
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--chip-bg);
         border: 1px solid var(--border);
+        transition: background 0.3s, border-color 0.3s;
       }
       .stat-box .number {
         font-size: 1.25rem;
         font-weight: 700;
-        color: #fff;
+        color: var(--text-heading);
         line-height: 1.2;
       }
       .stat-box .label {
@@ -374,6 +464,7 @@
         border: 1px solid rgba(79, 125, 245, 0.15);
         color: var(--accent-light);
         font-weight: 500;
+        transition: background 0.3s, border-color 0.3s;
       }
 
       /* ── Section common ── */
@@ -403,7 +494,7 @@
         font-weight: 700;
         letter-spacing: -0.02em;
         margin-bottom: 0.4rem;
-        color: #fff;
+        color: var(--text-heading);
       }
       .section-desc {
         color: var(--text-secondary);
@@ -418,7 +509,8 @@
         border-radius: 10px;
         border: 1px solid var(--border);
         padding: 1.5rem;
-        transition: transform 0.25s, border-color 0.25s;
+        transition: transform 0.25s, border-color 0.25s, background 0.3s, box-shadow 0.3s;
+        box-shadow: var(--shadow-card);
       }
       .card:hover {
         transform: translateY(-3px);
@@ -434,7 +526,7 @@
       .card h3 {
         font-size: 1rem;
         font-weight: 600;
-        color: #fff;
+        color: var(--text-heading);
         line-height: 1.35;
       }
       .card-badge {
@@ -462,10 +554,11 @@
         font-size: 0.7rem;
         padding: 0.15rem 0.5rem;
         border-radius: 4px;
-        background: rgba(255, 255, 255, 0.04);
+        background: var(--chip-bg);
         border: 1px solid var(--border);
         color: var(--text-secondary);
         font-weight: 500;
+        transition: background 0.3s, border-color 0.3s;
       }
       .card ul {
         list-style: none;
@@ -507,7 +600,8 @@
         border-radius: 10px;
         background: var(--bg-card);
         border: 1px solid var(--border);
-        transition: border-color 0.25s;
+        transition: border-color 0.25s, background 0.3s, box-shadow 0.3s;
+        box-shadow: var(--shadow-card);
       }
       .skill-group:hover {
         border-color: var(--border-hover);
@@ -527,7 +621,7 @@
         font-size: 0.85rem;
         font-weight: 600;
         margin-bottom: 0.6rem;
-        color: #fff;
+        color: var(--text-heading);
       }
       .chips {
         display: flex;
@@ -540,8 +634,8 @@
         border-radius: 5px;
         border: 1px solid var(--border);
         color: var(--text-secondary);
-        background: rgba(255, 255, 255, 0.02);
-        transition: border-color 0.2s, color 0.2s;
+        background: var(--chip-bg);
+        transition: border-color 0.2s, color 0.2s, background 0.3s;
         font-weight: 450;
       }
       .chip:hover {
@@ -582,11 +676,12 @@
         background: var(--bg);
         border: 2px solid var(--accent);
         z-index: 1;
+        transition: background 0.3s;
       }
       .edu-item h3 {
         font-size: 0.95rem;
         font-weight: 600;
-        color: #fff;
+        color: var(--text-heading);
         margin-bottom: 0.1rem;
       }
       .edu-item .edu-school {
@@ -613,7 +708,8 @@
         border-radius: 8px;
         background: var(--bg-card);
         border: 1px solid var(--border);
-        transition: border-color 0.25s;
+        transition: border-color 0.25s, background 0.3s, box-shadow 0.3s;
+        box-shadow: var(--shadow-card);
       }
       .achievement-item:hover {
         border-color: var(--border-hover);
@@ -649,7 +745,7 @@
         font-size: 1.35rem;
         font-weight: 700;
         margin-bottom: 0.75rem;
-        color: #fff;
+        color: var(--text-heading);
       }
       .contact-info > p {
         color: var(--text-secondary);
@@ -670,9 +766,10 @@
         border-radius: 8px;
         background: var(--bg-card);
         border: 1px solid var(--border);
-        transition: border-color 0.25s, transform 0.2s;
+        transition: border-color 0.25s, transform 0.2s, background 0.3s, box-shadow 0.3s;
         color: var(--text);
         text-decoration: none;
+        box-shadow: var(--shadow-card);
       }
       .contact-link:hover {
         border-color: var(--border-hover);
@@ -711,12 +808,14 @@
         border-radius: 10px;
         background: var(--bg-card);
         border: 1px solid var(--border);
+        box-shadow: var(--shadow-card);
+        transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
       }
       .contact-form-card h3 {
         font-size: 1.05rem;
         font-weight: 600;
         margin-bottom: 1.25rem;
-        color: #fff;
+        color: var(--text-heading);
       }
       .form-group {
         margin-bottom: 0.85rem;
@@ -734,16 +833,16 @@
         padding: 0.6rem 0.8rem;
         border-radius: 6px;
         border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.03);
+        background: var(--bg-input);
         color: var(--text);
         font-size: 0.88rem;
         font-family: inherit;
-        transition: border-color 0.2s;
+        transition: border-color 0.2s, background 0.3s;
         outline: none;
       }
       .form-group input::placeholder,
       .form-group textarea::placeholder {
-        color: rgba(160, 164, 184, 0.4);
+        color: var(--placeholder);
       }
       .form-group input:focus,
       .form-group textarea:focus {
@@ -780,6 +879,7 @@
       footer {
         padding: 2rem 0;
         border-top: 1px solid var(--border);
+        transition: border-color 0.3s;
       }
       .footer-inner {
         display: flex;
@@ -869,17 +969,27 @@
           <div class="logo">SJ</div>
           <span class="nav-name">Samyak Jain</span>
         </div>
-        <div class="nav-links">
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#projects">Projects</a>
-          <a href="#skills">Skills</a>
-          <a href="#education">Education</a>
-          <a href="#contact" class="nav-contact">Contact</a>
+        <div class="nav-right">
+          <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#projects">Projects</a>
+            <a href="#skills">Skills</a>
+            <a href="#education">Education</a>
+            <a href="#contact" class="nav-contact">Contact</a>
+          </div>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+            <svg class="icon-sun" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+            </svg>
+            <svg class="icon-moon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+            </svg>
+          </button>
+          <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+          </button>
         </div>
-        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
-          <span></span><span></span><span></span>
-        </button>
       </nav>
     </header>
 
@@ -1283,13 +1393,35 @@
     </footer>
 
     <script>
+      // Year
       document.getElementById("year").textContent = new Date().getFullYear();
 
+      // Theme toggle
+      const themeToggle = document.getElementById("themeToggle");
+      const html = document.documentElement;
+
+      // Load saved theme or detect system preference
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme) {
+        html.setAttribute("data-theme", savedTheme);
+      } else if (window.matchMedia("(prefers-color-scheme: light)").matches) {
+        html.setAttribute("data-theme", "light");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const current = html.getAttribute("data-theme");
+        const next = current === "dark" ? "light" : "dark";
+        html.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+
+      // Header scroll effect
       const header = document.getElementById("header");
       window.addEventListener("scroll", () => {
         header.classList.toggle("scrolled", window.scrollY > 50);
       });
 
+      // Mobile menu
       const hamburger = document.getElementById("hamburger");
       const mobileMenu = document.getElementById("mobileMenu");
       hamburger.addEventListener("click", () => {
@@ -1303,6 +1435,7 @@
         document.body.style.overflow = "";
       }
 
+      // Active nav link on scroll
       const sections = document.querySelectorAll("section[id]");
       const navLinks = document.querySelectorAll(".nav-links a:not(.nav-contact)");
       window.addEventListener("scroll", () => {
@@ -1319,6 +1452,7 @@
         });
       });
 
+      // Scroll reveal
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
